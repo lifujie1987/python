@@ -1,2 +1,2 @@
-# python
-Python学习
+# python 
+这个例子是一个学校类，学生类和老师类
