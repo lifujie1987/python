@@ -10,6 +10,6 @@
 ```
 class Teacher(School):
     def __init__(self,name,age,sex):
-    super(Teacher,self,School):
+    super(Teacher,self).__init__(self,name,age,sex)
     
 ```
