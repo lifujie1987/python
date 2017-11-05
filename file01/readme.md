@@ -33,3 +33,4 @@ if hasattr(self,'string'):
     func()
 ```
 # 线程守护，setDaemon(True)
+将主线程设置为Daemon线程，它退出，其他子线程会自动结束。
