@@ -23,3 +23,10 @@ class Teacher(School):
 ## 本篇将详细介绍Python 类的成员、成员修饰符、类的特殊成员。
 **类的成员可以分为三大类：字段、方法和属性**
 http://images2015.cnblogs.com/blog/425762/201509/425762-20150916222236164-249943282.png
+
+#反射
+hasattr // 通过字符串来访问内存
+```
+if hasattr(self,'string'):
+    getattr()
+```
