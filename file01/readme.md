@@ -28,5 +28,6 @@ http://images2015.cnblogs.com/blog/425762/201509/425762-20150916222236164-249943
 hasattr // 通过字符串来访问内存
 ```
 if hasattr(self,'string'):
-    getattr()
+    func=getattr(self,'string')
+    func()
 ```
