@@ -32,3 +32,4 @@ if hasattr(self,'string'):
     func=getattr(self,'string')
     func()
 ```
+# 线程守护，setDaemon(True)
