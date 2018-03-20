@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+# Created on 2018-03-16 15:41:52
+# Project: vander
+import re
+from pyspider.libs.base_handler import *
+
+
+class Handler(BaseHandler):
+    crawl_config = {
+    }
+    def __init__(self):  #定义翻页次数
+        self.base_url='http://www.acfun.cn/space/next?uid=350475&type=article&orderBy=2&pageNo='  
+        self.page_num=1
+        self.total_num=35  
+    @every(minutes=24 * 60)
+    def on_start(self):  #生成带页面的url
+        while self.page_num <= self.total_num:
+            url=self.base_url+str(self.page_num)
+            #print (url)
+            self.crawl(url, callback=self.index_page)
+            self.page_num +=1     
+  
+    @config(age=10 * 24 * 60 * 60)
+    def index_page(self, response):   #从获取的json中提取真实单页地址，并处理成标准url
+        f=response.json['data']['html'] 
+        res = re.findall(r'ac[0-9].*? title=.*? ', f)
+        for i in res:
+            new=('http://www.acfun.cn/a/'+i).split()[0]
+            new2=new[:-1]
+            self.crawl(new2, callback=self.detail_page) #传入下一层
+
+
+    @config(priority=2)
+    def detail_page(self, response):  #解析二级页面，提取图片地址
+        a=str(response.doc('.article-content').html())
+        picadd=re.findall(r'http.*?.jpg',a)
+        return {
+            "content":picadd,
+            
+        }
